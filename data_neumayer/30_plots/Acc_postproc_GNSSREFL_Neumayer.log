@@ -1,0 +1,10 @@
+
+GFZ rapid orbits downloaded to: /users/elsaduy/Desktop/Canwell Proj 2026/GNSS_RR/gnssrefl/data/temp/orbits/
+
+GFZ rapid orbits unzipped
+original zipped orbit files (.gz) moved to parent dir /users/elsaduy/Desktop/Canwell Proj 2026/GNSS_RR/gnssrefl/data/temp/orbits/
+
+Rinex3 files copied and renamed to: /users/elsaduy/Desktop/Canwell Proj 2026/GNSS_RR/gnssrefl/data/temp/rin3/
+
+Rinex3 files converted to rinex2 and moved to yearly subfolders.
+Warning: No matching RINEX files found to extract dates. Using default/empty valu        es.

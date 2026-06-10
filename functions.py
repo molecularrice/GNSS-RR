@@ -2037,7 +2037,7 @@ def prepare_orbits(sp3_outdir, raporbit_path, gnssir_path):
     unzip_orbits(sp3_tempdir)
 
     # Q: rename orbit files (need to match the gnssrefl input name format!)
-    rename_orbits(sp3_tempdir, gnssir_path)
+    rename_orbits(sp3_tempdir, gnssir_path, sp3_outdir)
 
 
 def get_orbits(sp3_outdir, raporbit_path):
@@ -2056,7 +2056,13 @@ def get_orbits(sp3_outdir, raporbit_path):
         os.makedirs(sp3_tempdir, exist_ok=True)
 
     # get the newest year, doy from orbit file from temp orbit dir
-    yeardoy_newest = sorted(glob.glob(sp3_outdir + '*.gz'), reverse=True)[0].split('_')[1]
+   # yeardoy_newest = sorted(glob.glob(sp3_outdir + '*.gz'), reverse=True)[0].split('_')[1]
+# next three lines added in post to correct original microsoft code
+
+    newest_filepath = sorted(glob.glob(sp3_outdir + '*.gz'), reverse=True)[0]
+    newest_filename = os.path.basename(newest_filepath) # This gets just 'GFZ0OPSRAP_20230930000...'
+    yeardoy_newest = newest_filename.split('_')[1]
+
     year_newest = int(yeardoy_newest[:4])
     doy_newest = int(yeardoy_newest[4:7])
 
@@ -2070,9 +2076,9 @@ def get_orbits(sp3_outdir, raporbit_path):
     gpsweek_list = list(range(gpsweek_newest, gpsweek_today + 1, 1))
 
     for gpswk in gpsweek_list:
-        download_path = raporbit_path + 'w' + str(gpswk) + '/'
+        download_path = raporbit_path + '/' +  'w' + str(gpswk) + '/'
         # download all .SP3 rapid orbits from ftp server's subfolders
-        subprocess.call('wget -r -np -nc -nH --cut-dirs=4 -A .SP3.gz ' + download_path + ' -P ' + sp3_tempdir)
+        subprocess.call('wget -r -np -nc -nH --cut-dirs=4 -A .SP3.gz ' + download_path + ' -P ' + sp3_tempdir, shell=True)
 
     print(colored("\nGFZ rapid orbits downloaded to: %s" % sp3_outdir, 'blue'))
 
@@ -2085,7 +2091,8 @@ def unzip_orbits(sp3_tempdir):
         :param sp3_tempdir: temporary orbit processing directory
         """
     # unzip all files
-    subprocess.call(r'7z e -y ' + sp3_tempdir + ' -o' + sp3_tempdir)
+    subprocess.call(f'7z e -y "{sp3_tempdir}*.gz" -o"{sp3_tempdir}"', shell=True)
+   # subprocess.call(r'7z e -y ' + sp3_tempdir + ' -o' + sp3_tempdir, shell = True)
     print(colored("\nGFZ rapid orbits unzipped", 'blue'))
 
 
@@ -2119,7 +2126,8 @@ def rename_orbits(sp3_tempdir, gnssir_path, sp3_outdir):
         else:
             os.remove(os.path.dirname(orbit_file) + '/' + outfile)
             print("file in destination already exists, move aborted, file removed")
-    print(colored("\nGFZ rapid orbits renamed and moved to yearly (e.g. 2021): %s" % dest_dir, 'blue'))
+   # print(colored("\nGFZ rapid orbits renamed and moved to yearly (e.g. 2021): %s" % dest_dir, 'blue'))
+            print(colored("\nGFZ rapid orbits renamed and moved to yearly format inside: %s" % sp3_outdir, 'blue'))
 
     # move zipped original orbit files (.gz) to parent dir
     for f in glob.iglob(sp3_tempdir + '*.gz', recursive=True):
@@ -2189,18 +2197,19 @@ def conv_obs(rin_temp, gnssir_path, base_name):
             subprocess.call(
                 r'gfzrnx -finp ' + rinex_file + ' -vo 2 -smp 30 -fout ' + gnssir_path + 'data/rinex/' + base_name.lower() + '/' + year + '/::RX2::')
 
-    print(colored(
-        "\nRinex3 files converted to rinex2 and moved to yearly (e.g. 2021): %s" % gnssir_path + 'data/rinex/' + base_name.lower() + '/' + year + '/',
-        'blue'))
+    print(colored("\nRinex3 files converted to rinex2 and moved to yearly subfolders.", 'blue'))
 
-    # return start and end year, doy for GNSS-IR processing
-    year_start = year[-1]  # '2021'
-    doy_start = doy[-1]  # '330'
-    year_end = year[0]
-    doy_end = doy[0]
+    # Safe fallback if the data file conversion loop was skipped
+    if 'year' in locals() and len(year) > 0:
+        year_start = year[-1]
+        doy_start = doy[-1]
+        year_end = year[0]
+        doy_end = doy[0]
+    else:
+        print(colored("Warning: No matching RINEX files found to extract dates. Using default/empty valu        es.", "yellow"))
+        year_start, year_end, doy_start, doy_end = "2023", "2023", "001", "365"
 
     return year_start, year_end, doy_start, doy_end
-
 
 def read_gnssir(dest_path, ubuntu_path, base_name, yy='21', copy=False, pickle='nmlb'):
     """ Plot GNSS interferometric reflectometry (GNSS-IR) accumulation results from the high-end base station

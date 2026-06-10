@@ -30,8 +30,8 @@ import functions as f
 
 
 # CHOOSE: DEFINE paths, config file, and filenames !!!
-dest_path = 'C:/Users/sladina.BGEO02P102/Documents/SD_Card/Postdoc/AWI/05_Analysis/Run_RTKLib/data_neumayer/'    # data destination path for processing
-gnssir_path = '//wsl.localhost/Ubuntu/home/sladina/test/gnssrefl/'      # GNSS-Reflectometry ('gnssrefl') working directory (on Ubuntu)
+dest_path = '/Users/elsaduy/Desktop/Canwell Proj 2026/GNSS_RR/data_neumayer/'    # data destination path for processing
+gnssir_path = '/users/elsaduy/Desktop/Canwell Proj 2026/GNSS_RR/gnssrefl/'      # GNSS-Reflectometry ('gnssrefl') working directory (on Ubuntu)
 raporbit_path = 'ftp://isdcftp.gfz-potsdam.de/gnss/products/rapid'      # GFZ data server from where GNSS rapid orbits are downloaded
 sp3_outdir = gnssir_path + 'data/temp/orbits/'                          # temporary output directory to store & convert downloaded orbit files
 rin_temp = gnssir_path + 'data/temp/rin3/'                              # temporary output directory to copy & convert rinex observation files
