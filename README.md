@@ -1,4 +1,7 @@
 # GNSS_RR
+
+This repository is a copy of the code written by lasteine on github for modeling GNSS-RR data. The original code as it was written is not particularly compatible with macOS. This is my attempt to make the code work on a mac system. Most of the alterations I've made involve changing the paths written into the code, since they were originally written for a Windows operating system. 
+
 Continuous estimation of in-situ snow/firn accumulation, snow water equivalent (snow mass), and snow/firn density 
 on a fast-moving surface (ice shelf) using combined Global Navigation Satellite System (GNSS) reflectometry/refractometry (GNSS-RR)}
 
