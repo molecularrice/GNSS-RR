@@ -100,7 +100,7 @@ def check_existing_files(dest_path, rover):
     # get file names
     files = sorted(glob.iglob(parent_dir + '/' + rover + '???0.*O', recursive=True), reverse=True)
     # get newest year of files in processing folder
-    year_max = max([os.path.basename(f).split('.')[1][:2] for f in files])
+    year_max = max([os.path.basename(f).split('.')[1][:2] for f in files], default='26')
     print(colored('newest year in existing files of parent dir: %s' % year_max, 'blue'))
 
     # get newest doy of files in processing folder
