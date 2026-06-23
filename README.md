@@ -31,7 +31,7 @@ The scripts should be executed one after the other (at the earliest when the pre
    runs a python script which defines all data paths and prepares (download, unzip, rename & move GNSS rapid orbit files) GNSS orbit & observation files needed for "gnssrefl".
    
 2. run_gnssrefl_ubuntu.sh (on Linux)
-   runs "gnssrefl" by first converting all GNSS rinex files to column-based SNR files needed as input for then running the GNSS-IR processing 
+   runs "gnssrefl" by first converting all GNSS rinex files to column-based SNR files needed as input for then running the GNSS-IR processing. 
 *When you run this file, you need to specify all five arguments defined in the .sh file within your terminal command. The arguments in order are <year_start> <doy_start> <year_end> <doy_end> <station>. So exceuting this script would look something like ./run_gnssrefl_ubuntu.sh <year_start> <doy_start> <year_end> <doy_end> <station> with exact values substituted in.*.
 
 3. automate_SWE_Acc_density.sh (on Windows)
