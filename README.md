@@ -1,6 +1,6 @@
 # GNSS_RR
 
-This repository is a copy of the code written by lasteine on github for modeling GNSS-RR data. The original code as it was written is not particularly compatible with macOS. This is my attempt to make the code work on a mac system. Most of the alterations I've made involve changing the paths written into the code, since they were originally written for a Windows operating system. 
+*This repository is a copy of the code written by lasteine on github for modeling GNSS-RR data. The original code as it was written is not particularly compatible with macOS. This is my attempt to make the code work on a mac system. Most of the alterations I've made involve changing the paths written into the code, since they were originally written for a Windows operating system. Notes in the README made by myself (Elsa/Molecularrice) will be in italics.*
 
 Continuous estimation of in-situ snow/firn accumulation, snow water equivalent (snow mass), and snow/firn density 
 on a fast-moving surface (ice shelf) using combined Global Navigation Satellite System (GNSS) reflectometry/refractometry (GNSS-RR)}
@@ -31,7 +31,8 @@ The scripts should be executed one after the other (at the earliest when the pre
    runs a python script which defines all data paths and prepares (download, unzip, rename & move GNSS rapid orbit files) GNSS orbit & observation files needed for "gnssrefl".
    
 2. run_gnssrefl_ubuntu.sh (on Linux)
-   runs "gnssrefl" by first converting all GNSS rinex files to column-based SNR files needed as input for then running the GNSS-IR processing.
+   runs "gnssrefl" by first converting all GNSS rinex files to column-based SNR files needed as input for then running the GNSS-IR processing 
+*When you run this file, you need to specify all five arguments defined in the .sh file within your terminal command. The arguments in order are <year_start> <doy_start> <year_end> <doy_end> <station>. So exceuting this script would look something like ./run_gnssrefl_ubuntu.sh <year_start> <doy_start> <year_end> <doy_end> <station> with exact values substituted in.*.
 
 3. automate_SWE_Acc_density.sh (on Windows)
    runs a python script which does all the rest. Data paths need to be defined here. The python script contains the workflow from definition 

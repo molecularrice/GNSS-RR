@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # change directory to python working directory
-cd "/Users/elsaduy/Desktop/Canwell Proj 2026/GNSS_RR/"
+cd "/Users/elsaduy/Desktop/'Canwell Proj 2026'/GNSS_RR/"
 
 mkdir -p data_neumayer/30_plots/
 

@@ -32,7 +32,8 @@ import functions as f
 # CHOOSE: DEFINE paths, config file, and filenames !!!
 dest_path = '/Users/elsaduy/Desktop/Canwell Proj 2026/GNSS_RR/data_neumayer/'    # data destination path for processing
 gnssir_path = '/users/elsaduy/Desktop/Canwell Proj 2026/GNSS_RR/gnssrefl/'      # GNSS-Reflectometry ('gnssrefl') working directory (on Ubuntu)
-raporbit_path = 'ftp://isdcftp.gfz-potsdam.de/gnss/products/rapid'      # GFZ data server from where GNSS rapid orbits are downloaded
+raporbit_path = 'https://isdc-data.gfz.de/gnss/products/rapid'
+#raporbit_path = 'ftp://isdcftp.gfz-potsdam.de/gnss/products/rapid'      # GFZ data server from where GNSS rapid orbits are downloaded
 sp3_outdir = gnssir_path + 'data/temp/orbits/'                          # temporary output directory to store & convert downloaded orbit files
 rin_temp = gnssir_path + 'data/temp/rin3/'                              # temporary output directory to copy & convert rinex observation files
 json = gnssir_path + '/data/input/nmlb.json'                            # path to gnssrefl configfile '.json'
